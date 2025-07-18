@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form + To-Do List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header, main {
+      padding: 1rem;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    input, textarea, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    input, textarea {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+    }
+    .todo {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .todo ul {
+      list-style: none;
+      padding: 0;
+    }
+    .todo li {
+      padding: 0.5rem;
+      background: #fff;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+    }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Responsive Contact Form & To-Do List</h1>
+  </header>
+  <main class="container">
+    <form id="contactForm">
+      <label>Name:
+        <input type="text" id="name" required>
+        <div class="error" id="nameError"></div>
+      </label>
+      <label>Email:
+        <input type="email" id="email" required>
+        <div class="error" id="emailError"></div>
+      </label>
+      <label>Message:
+        <textarea id="message" rows="4" required></textarea>
+        <div class="error" id="messageError"></div>
+      </label>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Enter a task">
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let isValid = true;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Clear previous errors
+      ['nameError', 'emailError', 'messageError'].forEach(id => document.getElementById(id).textContent = '');
+
+      if (!name) {
+        document.getElementById('nameError').textContent = 'Name is required.';
+        isValid = false;
+      }
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').textContent = 'Enter a valid email.';
+        isValid = false;
+      }
+      if (!message) {
+        document.getElementById('messageError').textContent = 'Message is required.';
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert('Form submitted successfully!');
+        document.getElementById('contactForm').reset();
+      }
+    });
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const taskText = input.value.trim();
+      if (!taskText) return;
+
+      const li = document.createElement('li');
+      li.innerHTML = `${taskText} <button onclick="this.parentElement.remove()">Remove</button>`;
+      document.getElementById('taskList').appendChild(li);
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
