@@ -1,0 +1,75 @@
+<!-- Task 3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    .option {
+      background-color: #eee;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2 id="question">Question appears here</h2>
+    <div class="option" onclick="selectOption(this)"></div>
+    <div class="option" onclick="selectOption(this)"></div>
+    <div class="option" onclick="selectOption(this)"></div>
+    <p id="score"></p>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "What is the capital of France?", options: ["Paris", "Berlin", "Rome"], answer: "Paris" },
+      { q: "2 + 2 equals?", options: ["3", "4", "5"], answer: "4" },
+      { q: "What color is the sky?", options: ["Blue", "Green", "Pink"], answer: "Blue" }
+    ];
+    let index = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      document.getElementById("score").textContent = "";
+      const q = questions[index];
+      document.getElementById("question").textContent = q.q;
+      const options = document.querySelectorAll(".option");
+      options.forEach((btn, i) => {
+        btn.textContent = q.options[i];
+      });
+    }
+
+    function selectOption(el) {
+      if (el.textContent === questions[index].answer) score++;
+      index++;
+      if (index < questions.length) loadQuestion();
+      else {
+        document.getElementById("question").textContent = "Quiz Complete!";
+        document.querySelectorAll(".option").forEach(btn => btn.style.display = "none");
+        document.getElementById("score").textContent = `Your Score: ${score}/${questions.length}`;
+      }
+    }
+
+    window.onload = loadQuestion;
+  </script>
+</body>
+</html>
