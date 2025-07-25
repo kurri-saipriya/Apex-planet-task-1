@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Listing</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <h1>Products</h1>
+  <ul>
+      <li><a href="todo.html">📝 To-Do List App</a></li>
+      <li><a href="index.html">🛍 Product Listing Page</a></li>
+    </ul>
+  <label>Category:
+    <select id="filterCategory" onchange="renderProducts()">
+      <option value="all">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+    </select>
+  </label>
+
+  <label>Sort By:
+    <select id="sortBy" onchange="renderProducts()">
+      <option value="rating">Rating</option>
+      <option value="price">Price</option>
+    </select>
+  </label>
+
+  <div id="productContainer"></div>
+
+  <script>
+    const products = [
+      { name: 'Laptop', category: 'electronics', price: 999, rating: 4.8 },
+      { name: 'T-Shirt', category: 'clothing', price: 19, rating: 4.2 },
+      { name: 'Headphones', category: 'electronics', price: 59, rating: 4.5 },
+      { name: 'Jeans', category: 'clothing', price: 39, rating: 4.0 },
+    ];
+
+    function renderProducts() {
+      const filter = document.getElementById('filterCategory').value;
+      const sort = document.getElementById('sortBy').value;
+
+      let filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+      filtered.sort((a, b) => sort === 'price' ? a.price - b.price : b.rating - a.rating);
+
+      const container = document.getElementById('productContainer');
+      container.innerHTML = '';
+      filtered.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <h3>${p.name}</h3>
+          <p>Category: ${p.category}</p>
+          <p>Price: $${p.price}</p>
+          <p>Rating: ${p.rating}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>

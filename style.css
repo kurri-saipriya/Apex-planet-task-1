@@ -1,0 +1,142 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  color: #333;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Navbar */
+nav {
+  background: linear-gradient(90deg, #00bcd4, #4dd0e1);
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffeb3b;
+}
+
+/* Sections */
+section {
+  padding: 60px 20px;
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: fadeIn 1s ease-in;
+}
+
+/* Background images per section (optional - replace URLs as needed) */
+#about {
+  background-image: url('https://source.unsplash.com/1600x900/?coding,developer');
+  color: white;
+  background-blend-mode: overlay;
+  background-color: rgba(0,0,0,0.5);
+}
+
+#projects {
+  background-image: url('https://source.unsplash.com/1600x900/?projects,technology');
+  background-color: rgba(255,255,255,0.7);
+  background-blend-mode: lighten;
+}
+
+#contact {
+  background-image: url('https://source.unsplash.com/1600x900/?contact,teamwork');
+  background-color: rgba(0,150,136,0.6);
+  background-blend-mode: multiply;
+  color: white;
+}
+
+/* Forms */
+input, textarea, button, select {
+  display: block;
+  width: 90%;
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background: #009688;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #00796b;
+}
+
+/* To-Do List */
+ul#taskList li {
+  background-color: #f1f1f1;
+  margin: 8px auto;
+  padding: 12px;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Product Listing */
+.product {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 600px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+select {
+  margin: 10px auto;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section {
+    padding: 40px 10px;
+  }
+}
